@@ -96,6 +96,8 @@
 
 **requirements approve → Architect 向け:**
 ```
+ブランチ: `feature/<name>`
+
 あなたは Architect です。`docs/roles/architect.md` と本ファイル (state.md)、
 `docs/features/<feature>/requirements.md` を読んでください。
 要件定義をもとに設計を行い、`docs/features/<feature>/design.md` を作成し、
@@ -104,6 +106,8 @@ PR を作成してください。完了時は state.md を更新してくださ�
 
 **design approve → Implementer 向け:**
 ```
+ブランチ: `feature/<name>`
+
 あなたは Implementer です。`docs/roles/implementer.md` と本ファイル (state.md)、
 `docs/features/<feature>/requirements.md` と `docs/features/<feature>/design.md` を読んでください。
 実装と UT を行い、PR を作成してください。完了時は state.md を更新してください。
@@ -111,11 +115,22 @@ PR を作成してください。完了時は state.md を更新してくださ�
 
 **implementation approve → Tester 向け:**
 ```
+ブランチ: `feature/<name>`
+
 あなたは Tester です。`docs/roles/tester.md` と本ファイル (state.md)、
 `docs/features/<feature>/requirements.md`、`docs/features/<feature>/design.md`、
 `docs/features/<feature>/test-ut.md` を読んでください。
 IT を実施し、`docs/features/<feature>/test-it.md` を作成してください。
 完了時は state.md を更新してください。
+```
+
+### 次のセッション用プロンプトの出力
+
+state.md を更新したあと、上記テンプレを実際の値で埋めた内容を以下の形式でチャット上に出力すること:
+
+```
+--- 次のセッション用プロンプト（コピーして使用） ---
+<テンプレの内容（ブランチ名・PR番号を実際の値に置換済み）>
 ```
 
 ## 禁則事項

@@ -66,12 +66,23 @@
 ### next_action_prompt テンプレ (Reviewer 向け)
 
 ```
+ブランチ: `feature/<name>/implementation`
+
 あなたは Reviewer です。`docs/roles/reviewer.md` と本ファイル (state.md)、
 `docs/features/<feature>/requirements.md`、`docs/features/<feature>/design.md`、
 `docs/features/<feature>/test-ut.md` を読んでください。
 Implementer が作成した実装 (PR #<番号>) をレビューし、
 approve または request changes を行ってください。
 完了時は state.md を更新し、next_action_prompt を次のロール向けに書き換えてください。
+```
+
+### 次のセッション用プロンプトの出力
+
+state.md を更新したあと、上記テンプレを実際の値で埋めた内容を以下の形式でチャット上に出力すること:
+
+```
+--- 次のセッション用プロンプト（コピーして使用） ---
+<テンプレの内容（ブランチ名・PR番号を実際の値に置換済み）>
 ```
 
 ## 禁則事項

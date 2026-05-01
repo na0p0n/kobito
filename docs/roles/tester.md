@@ -82,6 +82,8 @@ PASS / FAIL
 ### next_action_prompt テンプレ (IT PASS → 直也向け)
 
 ```
+ブランチ: `feature/<name>`
+
 IT が全件 PASS しました。`docs/features/<feature>/test-it.md` を確認してください。
 
 次のステップ: dev 環境へのデプロイと UAT 実施
@@ -94,12 +96,23 @@ IT が全件 PASS しました。`docs/features/<feature>/test-it.md` を確認�
 ### next_action_prompt テンプレ (IT FAIL → Implementer 向け)
 
 ```
+ブランチ: `feature/<name>/implementation`
+
 あなたは Implementer です。`docs/roles/implementer.md` と本ファイル (state.md)、
 `docs/features/<feature>/test-it.md` を読んでください。
 IT で以下の項目が FAIL しました。`feature/<name>/implementation` ブランチに修正を加え、
 PR を作成してください。完了時は state.md を更新してください。
 
 FAIL 項目: (test-it.md の FAIL 詳細を参照)
+```
+
+### 次のセッション用プロンプトの出力
+
+state.md を更新したあと、上記テンプレを実際の値で埋めた内容を以下の形式でチャット上に出力すること:
+
+```
+--- 次のセッション用プロンプト（コピーして使用） ---
+<テンプレの内容（ブランチ名・URL等を実際の値に置換済み）>
 ```
 
 ## 禁則事項
