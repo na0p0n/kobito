@@ -96,11 +96,11 @@ IT が全件 PASS しました。`docs/features/<feature>/test-it.md` を確認�
 ### next_action_prompt テンプレ (IT FAIL → Implementer 向け)
 
 ```
-ブランチ: `feature/<name>/implementation`
+ブランチ: `feature/<name>-impl`
 
 あなたは Implementer です。`docs/roles/implementer.md` と本ファイル (state.md)、
 `docs/features/<feature>/test-it.md` を読んでください。
-IT で以下の項目が FAIL しました。`feature/<name>/implementation` ブランチに修正を加え、
+IT で以下の項目が FAIL しました。`feature/<name>-impl` ブランチに修正を加え、
 PR を作成してください。完了時は state.md を更新してください。
 
 FAIL 項目: (test-it.md の FAIL 詳細を参照)

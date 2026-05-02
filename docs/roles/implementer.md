@@ -66,7 +66,7 @@
 ### next_action_prompt テンプレ (Reviewer 向け)
 
 ```
-ブランチ: `feature/<name>/implementation`
+ブランチ: `feature/<name>-impl`
 
 あなたは Reviewer です。`docs/roles/reviewer.md` と本ファイル (state.md)、
 `docs/features/<feature>/requirements.md`、`docs/features/<feature>/design.md`、
@@ -91,4 +91,4 @@ state.md を更新したあと、上記テンプレを実際の値で埋めた�
 - 受け入れ基準や評価基準を自分で追記・変更しない
 - 設計に存在しない機能を実装しない
 - 他ロールの作業ブランチや成果物を変更しない
-- IT 失敗の修正以外で `feature/<name>/it` ブランチを触らない
+- IT 失敗の修正以外で `feature/<name>-it` ブランチを触らない
