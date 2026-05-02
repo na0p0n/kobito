@@ -2,14 +2,14 @@
 feature: wakaba
 current_branch: feature/wakaba
 created_at: 2026-05-01T00:00:00Z
-last_updated: 2026-05-01T00:00:00Z
+last_updated: 2026-05-02T00:00:00Z
 current_stage: requirements
-current_role: pdm
-current_pr:
+current_role: architect
+current_pr: 2
 retry_count: 0
 state: in-progress
-uat_notion_url:
-uat_backlog_id:
+uat_notion_url: https://app.notion.com/p/3535213213e781a5b7edfaf7bb1a5fac
+uat_backlog_id: 35352132-13e7-8189-96f4-df6d7c163335
 ---
 
 ## idea_summary
@@ -45,12 +45,14 @@ uat_backlog_id:
 
 ## next_action_prompt
 
-あなたは PdM です。`docs/roles/pdm.md` と本ファイル (state.md) を読んでください。
-上記 `idea_summary` をもとに、`docs/features/wakaba/requirements.md` を作成してください。
-あわせて Notion の UAT ページ (UAT 子ページ配下) を作成し、UAT バックログ DB に新規行を追加してください。
-作業ブランチ: `feature/wakaba` から `feature/wakaba/requirements` を切って作業し、PR を作成してください。
-完了時は state.md を更新し、next_action_prompt を Reviewer 向けに書き換えてください。
+あなたは Architect です。`docs/roles/architect.md` と本ファイル (state.md)、
+`docs/features/wakaba/requirements.md` を読んでください。
+要件定義をもとに設計を行い、`docs/features/wakaba/design.md` を作成し、
+PR を作成してください。完了時は state.md を更新してください。
 
 ## history
 
 - 2026-05-01T00:00:00Z [ideation] feature created, idea: Wakaba (OSS 貢献ゴール管理ツール)
+- 2026-05-01T12:00:00Z [pdm] requirements drafted (PR #2)
+- 2026-05-01T22:00:00Z [reviewer] PR #2 request changes
+- 2026-05-02T00:00:00Z [reviewer] PR #2 approved, merged
