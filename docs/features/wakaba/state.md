@@ -2,7 +2,7 @@
 feature: wakaba
 current_branch: feature/wakaba
 created_at: 2026-05-01T00:00:00Z
-last_updated: 2026-05-02T02:40:00Z
+last_updated: 2026-05-02T03:10:00Z
 current_stage: implementation
 current_role: reviewer
 current_pr: 5
@@ -63,3 +63,4 @@ approve または request changes を行ってください。
 - 2026-05-02T12:00:00Z [architect] design drafted (PR #4)
 - 2026-05-02T13:00:00Z [reviewer] PR #4 approved, merged
 - 2026-05-02T02:40:00Z [implementer] implementation done (PR #5)
+- 2026-05-02T03:10:00Z [implementer] fix for IT failure (PR #5): auth.ts accessToken, nginx X-User-Id scope
