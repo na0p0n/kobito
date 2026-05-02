@@ -2,10 +2,10 @@
 feature: wakaba
 current_branch: feature/wakaba
 created_at: 2026-05-01T00:00:00Z
-last_updated: 2026-05-02T13:00:00Z
-current_stage: design
-current_role: implementer
-current_pr: 4
+last_updated: 2026-05-02T03:10:00Z
+current_stage: implementation
+current_role: reviewer
+current_pr: 5
 retry_count: 0
 state: in-progress
 uat_notion_url: https://app.notion.com/p/3535213213e781a5b7edfaf7bb1a5fac
@@ -45,11 +45,14 @@ uat_backlog_id: 35352132-13e7-8189-96f4-df6d7c163335
 
 ## next_action_prompt
 
-ブランチ: `feature/wakaba`
+ブランチ: `feature/wakaba-impl`
 
-あなたは Implementer です。`docs/roles/implementer.md` と本ファイル (state.md)、
-`docs/features/wakaba/requirements.md` と `docs/features/wakaba/design.md` を読んでください。
-実装と UT を行い、PR を作成してください。完了時は state.md を更新してください。
+あなたは Reviewer です。`docs/roles/reviewer.md` と本ファイル (state.md)、
+`docs/features/wakaba/requirements.md`、`docs/features/wakaba/design.md`、
+`docs/features/wakaba/test-ut.md` を読んでください。
+Implementer が作成した実装 (PR #5) をレビューし、
+approve または request changes を行ってください。
+完了時は state.md を更新し、next_action_prompt を次のロール向けに書き換えてください。
 
 ## history
 
@@ -59,3 +62,5 @@ uat_backlog_id: 35352132-13e7-8189-96f4-df6d7c163335
 - 2026-05-02T00:00:00Z [reviewer] PR #2 approved, merged
 - 2026-05-02T12:00:00Z [architect] design drafted (PR #4)
 - 2026-05-02T13:00:00Z [reviewer] PR #4 approved, merged
+- 2026-05-02T02:40:00Z [implementer] implementation done (PR #5)
+- 2026-05-02T03:10:00Z [implementer] fix for IT failure (PR #5): auth.ts accessToken, nginx X-User-Id scope

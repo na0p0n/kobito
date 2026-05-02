@@ -1,0 +1,12 @@
+# Gradle
+backend/.gradle/
+backend/build/
+!backend/build/libs/*.jar
+
+# Node.js
+frontend/node_modules/
+frontend/.next/
+
+# Environment
+.env
+.env.local

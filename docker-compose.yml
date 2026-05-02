@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: wakaba
+      POSTGRES_USER: wakaba
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-wakaba}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wakaba"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/wakaba
+      DB_USERNAME: wakaba
+      DB_PASSWORD: ${DB_PASSWORD:-wakaba}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://wakaba:${DB_PASSWORD:-wakaba}@db:5432/wakaba
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      AUTH_SECRET: ${AUTH_SECRET}
+      BACKEND_URL: http://backend:8080
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost}
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  pg_data:
