@@ -2,9 +2,9 @@
 feature: wakaba
 current_branch: feature/wakaba
 created_at: 2026-05-01T00:00:00Z
-last_updated: 2026-05-02T04:00:00Z
+last_updated: 2026-05-02T05:00:00Z
 current_stage: implementation
-current_role: reviewer
+current_role: tester
 current_pr: 6
 retry_count: 0
 state: in-progress
@@ -47,18 +47,11 @@ uat_backlog_id: 35352132-13e7-8189-96f4-df6d7c163335
 
 ブランチ: `feature/wakaba`
 
-あなたは Reviewer です。`docs/roles/reviewer.md` と本ファイル (state.md)、
+あなたは Tester です。`docs/roles/tester.md` と本ファイル (state.md)、
 `docs/features/wakaba/requirements.md`、`docs/features/wakaba/design.md`、
 `docs/features/wakaba/test-ut.md` を読んでください。
-Implementer が PR #5 レビュー指摘事項 (3点) を修正した実装 (PR #6) をレビューし、
-approve または request changes を行ってください。
-
-修正内容:
-1. `DiscordDigestService.sendDigestToAllUsers` — `users` テーブルからユーザーを取得し、ユーザーごとに `buildDigestPayload` を呼び出して Discord に送信するよう修正
-2. `SyncService.scheduledSync` — `accounts` テーブルからユーザーID + アクセストークンを取得し、`syncForUser` を呼び出すよう実装
-3. `auth.ts callbacks.session` — 2回目以降のセッション (account=undefined) でも `accounts` テーブルから `access_token` を読み込むよう修正
-
-完了時は state.md を更新し、next_action_prompt を次のロール向けに書き換えてください。
+IT を実施し、`docs/features/wakaba/test-it.md` を作成してください。
+完了時は state.md を更新してください。
 
 ## history
 
@@ -71,3 +64,4 @@ approve または request changes を行ってください。
 - 2026-05-02T02:40:00Z [implementer] implementation done (PR #5)
 - 2026-05-02T03:10:00Z [implementer] fix for IT failure (PR #5): auth.ts accessToken, nginx X-User-Id scope
 - 2026-05-02T04:00:00Z [implementer] fix for reviewer request changes (PR #6): DiscordDigestService.sendDigestToAllUsers, SyncService.scheduledSync, auth.ts session callback
+- 2026-05-02T05:00:00Z [reviewer] PR #6 approved, merged
