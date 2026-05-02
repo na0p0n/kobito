@@ -6,6 +6,7 @@ import com.wakaba.domain.GoalWithProgress
 import com.wakaba.mapper.AppConfigMapper
 import com.wakaba.mapper.ContributionMapper
 import com.wakaba.mapper.GoalMapper
+import com.wakaba.mapper.UserMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -22,6 +23,7 @@ class DiscordDigestServiceTest {
     private val goalMapper: GoalMapper = mock()
     private val appConfigMapper: AppConfigMapper = mock()
     private val goalService: GoalService = mock()
+    private val userMapper: UserMapper = mock()
     private val restClient: RestClient = mock()
     private lateinit var discordDigestService: DiscordDigestService
 
@@ -33,7 +35,7 @@ class DiscordDigestServiceTest {
     @BeforeEach
     fun setUp() {
         discordDigestService = DiscordDigestService(
-            contributionMapper, goalMapper, appConfigMapper, goalService, restClient
+            contributionMapper, goalMapper, appConfigMapper, goalService, userMapper, restClient
         )
     }
 
@@ -130,6 +132,34 @@ class DiscordDigestServiceTest {
         val result = discordDigestService.triggerManual()
 
         assertThat(result).isFalse()
+    }
+
+    @Test
+    fun `triggerManual - webhook URL が設定されているとき ユーザーごとに buildDigestPayload が呼ばれ true を返す`() {
+        val webhookUrl = "https://discord.com/api/webhooks/test"
+        val userId2 = UUID.randomUUID()
+        whenever(appConfigMapper.findByKey("discord_webhook_url")).thenReturn(
+            AppConfig("discord_webhook_url", webhookUrl, now)
+        )
+        whenever(userMapper.findAllUserIds()).thenReturn(listOf(userId, userId2))
+        whenever(contributionMapper.findByUserAndDateRange(any(), any(), any())).thenReturn(emptyList())
+        whenever(goalService.getGoalsWithProgress(any())).thenReturn(emptyList())
+        val requestBodyUriSpec = mock<RestClient.RequestBodyUriSpec>()
+        val requestBodySpec = mock<RestClient.RequestBodySpec>()
+        val responseSpec = mock<RestClient.ResponseSpec>()
+        whenever(restClient.post()).thenReturn(requestBodyUriSpec)
+        whenever(requestBodyUriSpec.uri(any<String>())).thenReturn(requestBodySpec)
+        whenever(requestBodySpec.header(any(), any())).thenReturn(requestBodySpec)
+        whenever(requestBodySpec.body(any())).thenReturn(requestBodySpec)
+        whenever(requestBodySpec.retrieve()).thenReturn(responseSpec)
+        whenever(responseSpec.toBodilessEntity()).thenReturn(mock())
+
+        val result = discordDigestService.triggerManual()
+
+        assertThat(result).isTrue()
+        verify(goalService, times(2)).getGoalsWithProgress(any())
+        verify(contributionMapper, times(2)).findByUserAndDateRange(any(), any(), any())
+        verify(restClient, times(2)).post()
     }
 
     // ---- helpers ----

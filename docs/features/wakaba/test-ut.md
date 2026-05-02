@@ -7,8 +7,10 @@
 | `GoalService` | ゴール一覧取得・作成・削除、進捗計算 |
 | `ContributionService` | 日別/週次貢献集計、最終同期日時取得 |
 | `ConfigService` | アプリ設定取得・Discord Webhook URL 更新 |
+| `SyncService#scheduledSync` | スケジュール同期でユーザーごとに syncForUser を呼ぶ |
 | `SyncService#parseContributions` | GitHub GraphQL レスポンスから Contribution への変換 |
-| `DiscordDigestService#buildDigestPayload` | Discord 送信ペイロード生成、手動送信トリガー |
+| `DiscordDigestService#buildDigestPayload` | Discord 送信ペイロード生成 |
+| `DiscordDigestService#triggerManual` | 手動送信トリガー (webhook URL 検証 + ユーザーごとに送信) |
 
 ## UT 項目
 
@@ -53,6 +55,8 @@
 | 37 | `DiscordDigestService#buildDigestPayload` | ゴールなし | ゴール進捗情報を含まない | PASS |
 | 38 | `DiscordDigestService#triggerManual` | webhook URL = null | false を返す | PASS |
 | 39 | `DiscordDigestService#triggerManual` | webhook URL = 空文字 | false を返す | PASS |
+| 40 | `DiscordDigestService#triggerManual` | webhook URL が設定済み | ユーザーごとに buildDigestPayload が呼ばれ true を返す | PASS |
+| 41 | `SyncService#scheduledSync` | 複数ユーザーのアカウントがある場合 | ユーザーごとに syncForUser (GitHub API 呼び出し) が実行される | PASS |
 
 ## カバレッジ方針
 

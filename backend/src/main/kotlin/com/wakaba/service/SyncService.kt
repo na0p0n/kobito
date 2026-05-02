@@ -3,6 +3,7 @@ package com.wakaba.service
 import com.wakaba.domain.Contribution
 import com.wakaba.domain.ContributionType
 import com.wakaba.mapper.ContributionMapper
+import com.wakaba.mapper.UserMapper
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
@@ -16,6 +17,7 @@ data class SyncResult(val syncedAt: String, val totalRecords: Int)
 @Service
 class SyncService(
     private val contributionMapper: ContributionMapper,
+    private val userMapper: UserMapper,
     private val restClient: RestClient,
 ) {
     private val log = LoggerFactory.getLogger(SyncService::class.java)
@@ -23,6 +25,13 @@ class SyncService(
     @Scheduled(cron = "0 0 * * * *", zone = "Asia/Tokyo")
     fun scheduledSync() {
         log.info("Scheduled sync triggered")
+        userMapper.findAllUsersWithAccessToken().forEach { (userId, accessToken) ->
+            try {
+                syncForUser(userId, accessToken)
+            } catch (e: Exception) {
+                log.error("Scheduled sync failed for user $userId: ${e.message}")
+            }
+        }
     }
 
     fun syncForUser(userId: UUID, accessToken: String): SyncResult {

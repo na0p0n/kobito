@@ -2,10 +2,12 @@ package com.wakaba.service
 
 import com.wakaba.domain.ContributionType
 import com.wakaba.mapper.ContributionMapper
+import com.wakaba.mapper.UserAccount
+import com.wakaba.mapper.UserMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.kotlin.mock
+import org.mockito.kotlin.*
 import org.springframework.web.client.RestClient
 import java.time.LocalDate
 import java.util.UUID
@@ -13,6 +15,7 @@ import java.util.UUID
 class SyncServiceTest {
 
     private val contributionMapper: ContributionMapper = mock()
+    private val userMapper: UserMapper = mock()
     private val restClient: RestClient = mock()
     private lateinit var syncService: SyncService
 
@@ -21,7 +24,37 @@ class SyncServiceTest {
 
     @BeforeEach
     fun setUp() {
-        syncService = SyncService(contributionMapper, restClient)
+        syncService = SyncService(contributionMapper, userMapper, restClient)
+    }
+
+    // ---- scheduledSync ----
+
+    @Test
+    fun `scheduledSync - ユーザーとアクセストークンを取得し syncForUser が呼ばれる`() {
+        val userId2 = UUID.randomUUID()
+        val userAccounts = listOf(
+            UserAccount(userId, "token-a"),
+            UserAccount(userId2, "token-b"),
+        )
+        whenever(userMapper.findAllUsersWithAccessToken()).thenReturn(userAccounts)
+        val requestBodyUriSpec = mock<RestClient.RequestBodyUriSpec>()
+        val requestBodySpec = mock<RestClient.RequestBodySpec>()
+        val responseSpec = mock<RestClient.ResponseSpec>()
+        whenever(restClient.post()).thenReturn(requestBodyUriSpec)
+        whenever(requestBodyUriSpec.uri(any<String>())).thenReturn(requestBodySpec)
+        whenever(requestBodySpec.header(any(), any())).thenReturn(requestBodySpec)
+        whenever(requestBodySpec.body(any())).thenReturn(requestBodySpec)
+        whenever(requestBodySpec.retrieve()).thenReturn(responseSpec)
+        @Suppress("UNCHECKED_CAST")
+        whenever(responseSpec.body(Map::class.java)).thenReturn(
+            mapOf("data" to mapOf("viewer" to mapOf("contributionsCollection" to emptyMap<String, Any>())))
+        )
+
+        syncService.scheduledSync()
+
+        verify(userMapper).findAllUsersWithAccessToken()
+        verify(restClient, times(2)).post()
+        verify(contributionMapper, never()).upsert(any())
     }
 
     // ---- parseContributions ----

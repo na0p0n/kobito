@@ -18,9 +18,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async session({ session, user, account }) {
       session.user.id = user.id;
-      if (account?.access_token) {
-        (session as Session & { accessToken: string }).accessToken =
-          account.access_token;
+      let accessToken = account?.access_token;
+      if (!accessToken) {
+        const result = await pool.query(
+          "SELECT access_token FROM accounts WHERE user_id = $1 AND provider = $2",
+          [user.id, "github"]
+        );
+        accessToken = result.rows[0]?.access_token ?? undefined;
+      }
+      if (accessToken) {
+        (session as Session & { accessToken: string }).accessToken = accessToken;
       }
       return session;
     },
