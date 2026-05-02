@@ -3,6 +3,7 @@ package com.wakaba.service
 import com.wakaba.mapper.AppConfigMapper
 import com.wakaba.mapper.ContributionMapper
 import com.wakaba.mapper.GoalMapper
+import com.wakaba.mapper.UserMapper
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
@@ -16,6 +17,7 @@ class DiscordDigestService(
     private val goalMapper: GoalMapper,
     private val appConfigMapper: AppConfigMapper,
     private val goalService: GoalService,
+    private val userMapper: UserMapper,
     private val restClient: RestClient,
 ) {
     private val log = LoggerFactory.getLogger(DiscordDigestService::class.java)
@@ -79,8 +81,10 @@ class DiscordDigestService(
     private fun sendDigestToAllUsers(webhookUrl: String) {
         val to = LocalDate.now().minusDays(1)
         val from = to.minusDays(6)
-        contributionMapper.findByUserAndDateRange(UUID(0, 0), from, to)
-        postToDiscord(webhookUrl, mapOf("content" to "週次レポートを生成しました"))
+        userMapper.findAllUserIds().forEach { userId ->
+            val payload = buildDigestPayload(userId, webhookUrl, from, to)
+            postToDiscord(webhookUrl, payload)
+        }
     }
 
     internal fun postToDiscord(webhookUrl: String, payload: Map<String, Any>) {
