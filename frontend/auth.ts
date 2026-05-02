@@ -1,4 +1,5 @@
-import NextAuth from "next-auth";
+import NextAuth, { type Session } from "next-auth";
+import type { AdapterUser } from "@auth/core/adapters";
 import GitHub from "next-auth/providers/github";
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "pg";
@@ -15,8 +16,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session, user }) {
+    async session({ session, user, account }) {
       session.user.id = user.id;
+      if (account?.access_token) {
+        (session as Session & { accessToken: string }).accessToken =
+          account.access_token;
+      }
       return session;
     },
   },
