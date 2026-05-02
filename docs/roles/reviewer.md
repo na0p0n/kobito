@@ -31,6 +31,11 @@
 - スコープが明確か (In / Out が定義されているか)
 - 受け入れ基準がアウトカムベースで検証可能か
 - チェックリスト形式になっていないか
+- `## 未決事項` に以下のいずれかに該当する項目が残っていないか:
+  - **最終システムへの影響がある** (技術スタック・アーキテクチャ方針、スコープ変更、セキュリティ/コンプライアンス方針など)
+  - **コストが発生する** (有料 API・外部サービス、インフラスケーリング、有料ライセンスなど)
+
+  → 該当する未決事項が存在する場合は、PDM へ request changes を出すのではなく、**直也へ直接エスカレーションして回答を求める**こと。AI 同士でパスし合わない。
 
 ### design レビュー
 
@@ -91,6 +96,8 @@
 
 **requirements approve → Architect 向け:**
 ```
+ブランチ: `feature/<name>`
+
 あなたは Architect です。`docs/roles/architect.md` と本ファイル (state.md)、
 `docs/features/<feature>/requirements.md` を読んでください。
 要件定義をもとに設計を行い、`docs/features/<feature>/design.md` を作成し、
@@ -99,6 +106,8 @@ PR を作成してください。完了時は state.md を更新してくださ�
 
 **design approve → Implementer 向け:**
 ```
+ブランチ: `feature/<name>`
+
 あなたは Implementer です。`docs/roles/implementer.md` と本ファイル (state.md)、
 `docs/features/<feature>/requirements.md` と `docs/features/<feature>/design.md` を読んでください。
 実装と UT を行い、PR を作成してください。完了時は state.md を更新してください。
@@ -106,11 +115,22 @@ PR を作成してください。完了時は state.md を更新してくださ�
 
 **implementation approve → Tester 向け:**
 ```
+ブランチ: `feature/<name>`
+
 あなたは Tester です。`docs/roles/tester.md` と本ファイル (state.md)、
 `docs/features/<feature>/requirements.md`、`docs/features/<feature>/design.md`、
 `docs/features/<feature>/test-ut.md` を読んでください。
 IT を実施し、`docs/features/<feature>/test-it.md` を作成してください。
 完了時は state.md を更新してください。
+```
+
+### 次のセッション用プロンプトの出力
+
+state.md を更新したあと、上記テンプレを実際の値で埋めた内容を以下の形式でチャット上に出力すること:
+
+```
+--- 次のセッション用プロンプト（コピーして使用） ---
+<テンプレの内容（ブランチ名・PR番号を実際の値に置換済み）>
 ```
 
 ## 禁則事項

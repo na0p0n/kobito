@@ -66,6 +66,8 @@
 ### next_action_prompt テンプレ (Reviewer 向け)
 
 ```
+ブランチ: `feature/<name>-impl`
+
 あなたは Reviewer です。`docs/roles/reviewer.md` と本ファイル (state.md)、
 `docs/features/<feature>/requirements.md`、`docs/features/<feature>/design.md`、
 `docs/features/<feature>/test-ut.md` を読んでください。
@@ -74,10 +76,19 @@ approve または request changes を行ってください。
 完了時は state.md を更新し、next_action_prompt を次のロール向けに書き換えてください。
 ```
 
+### 次のセッション用プロンプトの出力
+
+state.md を更新したあと、上記テンプレを実際の値で埋めた内容を以下の形式でチャット上に出力すること:
+
+```
+--- 次のセッション用プロンプト（コピーして使用） ---
+<テンプレの内容（ブランチ名・PR番号を実際の値に置換済み）>
+```
+
 ## 禁則事項
 
 - PR 作成時点で UT が 1 件でも失敗している状態にしない
 - 受け入れ基準や評価基準を自分で追記・変更しない
 - 設計に存在しない機能を実装しない
 - 他ロールの作業ブランチや成果物を変更しない
-- IT 失敗の修正以外で `feature/<name>/it` ブランチを触らない
+- IT 失敗の修正以外で `feature/<name>-it` ブランチを触らない
