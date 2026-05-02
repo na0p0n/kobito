@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/wakaba}
+    username: ${DB_USERNAME:wakaba}
+    password: ${DB_PASSWORD:wakaba}
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.wakaba.domain
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.wakaba: DEBUG

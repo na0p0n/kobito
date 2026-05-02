@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.wakaba.service.ContributionServiceTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-05-02T02:20:15.171Z" hostname="vm" time="0.064">
+  <properties/>
+  <testcase name="getSummary - 複数日付で各日のデータが正しく分割される()" classname="com.wakaba.service.ContributionServiceTest" time="0.017"/>
+  <testcase name="getLastSyncedAt - 同期履歴がないとき null を返す()" classname="com.wakaba.service.ContributionServiceTest" time="0.004"/>
+  <testcase name="getWeeklyTotal - 各タイプの合計が正しく集計される()" classname="com.wakaba.service.ContributionServiceTest" time="0.026"/>
+  <testcase name="getSummary - from と to が同じ日付のとき1件を返す()" classname="com.wakaba.service.ContributionServiceTest" time="0.003"/>
+  <testcase name="getSummary - データなしのとき全日付で0カウントのエントリを返す()" classname="com.wakaba.service.ContributionServiceTest" time="0.002"/>
+  <testcase name="getSummary - 各タイプの件数が正しく集計される()" classname="com.wakaba.service.ContributionServiceTest" time="0.001"/>
+  <testcase name="getLastSyncedAt - 同期履歴があるとき日時文字列を返す()" classname="com.wakaba.service.ContributionServiceTest" time="0.001"/>
+  <testcase name="getWeeklyTotal - データなしのとき全項目0を返す()" classname="com.wakaba.service.ContributionServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.wakaba.service.SyncServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-05-02T02:20:15.582Z" hostname="vm" time="0.027">
+  <properties/>
+  <testcase name="parseContributions - データが空のとき空リストを返す()" classname="com.wakaba.service.SyncServiceTest" time="0.003"/>
+  <testcase name="parseContributions - data キーがないとき空リストを返す()" classname="com.wakaba.service.SyncServiceTest" time="0.001"/>
+  <testcase name="parseContributions - Review の occurredAt が正しく集計される()" classname="com.wakaba.service.SyncServiceTest" time="0.006"/>
+  <testcase name="parseContributions - 各 Contribution の userId が正しく設定される()" classname="com.wakaba.service.SyncServiceTest" time="0.001"/>
+  <testcase name="parseContributions - PR の occurredAt が正しく集計される()" classname="com.wakaba.service.SyncServiceTest" time="0.002"/>
+  <testcase name="parseContributions - Issue の occurredAt が正しく集計される()" classname="com.wakaba.service.SyncServiceTest" time="0.0"/>
+  <testcase name="parseContributions - Commit が複数リポジトリから集計される()" classname="com.wakaba.service.SyncServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
