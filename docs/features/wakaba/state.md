@@ -2,10 +2,10 @@
 feature: wakaba
 current_branch: feature/wakaba
 created_at: 2026-05-01T00:00:00Z
-last_updated: 2026-05-02T00:00:00Z
-current_stage: requirements
-current_role: architect
-current_pr: 2
+last_updated: 2026-05-02T13:00:00Z
+current_stage: design
+current_role: implementer
+current_pr: 4
 retry_count: 0
 state: in-progress
 uat_notion_url: https://app.notion.com/p/3535213213e781a5b7edfaf7bb1a5fac
@@ -45,10 +45,11 @@ uat_backlog_id: 35352132-13e7-8189-96f4-df6d7c163335
 
 ## next_action_prompt
 
-あなたは Architect です。`docs/roles/architect.md` と本ファイル (state.md)、
-`docs/features/wakaba/requirements.md` を読んでください。
-要件定義をもとに設計を行い、`docs/features/wakaba/design.md` を作成し、
-PR を作成してください。完了時は state.md を更新してください。
+ブランチ: `feature/wakaba`
+
+あなたは Implementer です。`docs/roles/implementer.md` と本ファイル (state.md)、
+`docs/features/wakaba/requirements.md` と `docs/features/wakaba/design.md` を読んでください。
+実装と UT を行い、PR を作成してください。完了時は state.md を更新してください。
 
 ## history
 
@@ -56,3 +57,5 @@ PR を作成してください。完了時は state.md を更新してくださ�
 - 2026-05-01T12:00:00Z [pdm] requirements drafted (PR #2)
 - 2026-05-01T22:00:00Z [reviewer] PR #2 request changes
 - 2026-05-02T00:00:00Z [reviewer] PR #2 approved, merged
+- 2026-05-02T12:00:00Z [architect] design drafted (PR #4)
+- 2026-05-02T13:00:00Z [reviewer] PR #4 approved, merged
