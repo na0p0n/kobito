@@ -2,12 +2,12 @@
 feature: wakaba
 current_branch: feature/wakaba
 created_at: 2026-05-01T00:00:00Z
-last_updated: 2026-05-04T10:00:00Z
-current_stage: implementation
-current_role: reviewer
+last_updated: 2026-05-04T11:00:00Z
+current_stage: it
+current_role: waiting-for-human
 current_pr: 7
 retry_count: 0
-state: in-progress
+state: waiting-for-human
 uat_notion_url: https://app.notion.com/p/3535213213e781a5b7edfaf7bb1a5fac
 uat_backlog_id: 35352132-13e7-8189-96f4-df6d7c163335
 ---
@@ -45,14 +45,15 @@ uat_backlog_id: 35352132-13e7-8189-96f4-df6d7c163335
 
 ## next_action_prompt
 
-ブランチ: `feature/wakaba-impl`
+ブランチ: `feature/wakaba`
 
-あなたは Reviewer です。`docs/roles/reviewer.md` と本ファイル (state.md)、
-`docs/features/wakaba/requirements.md`、`docs/features/wakaba/design.md`、
-`docs/features/wakaba/test-ut.md` を読んでください。
-Implementer が作成した実装 (PR #7) をレビューし、
-approve または request changes を行ってください。
-完了時は state.md を更新し、next_action_prompt を次のロール向けに書き換えてください。
+IT が全件 PASS しました。`docs/features/wakaba/test-it.md` を確認してください。
+
+次のステップ: dev 環境へのデプロイと UAT 実施
+1. `feature/wakaba` ブランチを `develop` にマージしてください
+2. dev 環境にデプロイしてください
+3. Notion の UAT ページ (https://app.notion.com/p/3535213213e781a5b7edfaf7bb1a5fac) に沿って UAT を実施してください
+4. UAT 完了後、バックログ DB のステータスを Done に更新してください
 
 ## history
 
@@ -67,3 +68,4 @@ approve または request changes を行ってください。
 - 2026-05-02T04:00:00Z [implementer] fix for reviewer request changes (PR #6): DiscordDigestService.sendDigestToAllUsers, SyncService.scheduledSync, auth.ts session callback
 - 2026-05-02T05:00:00Z [reviewer] PR #6 approved, merged
 - 2026-05-04T10:00:00Z [implementer] fix for IT failure (PR #7): AppBeans.kt UUID TypeHandler, tsconfig.json @/auth path alias
+- 2026-05-04T11:00:00Z [reviewer] PR #7 approved, merged
