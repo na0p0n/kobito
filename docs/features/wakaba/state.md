@@ -2,10 +2,10 @@
 feature: wakaba
 current_branch: feature/wakaba
 created_at: 2026-05-01T00:00:00Z
-last_updated: 2026-05-02T05:00:00Z
+last_updated: 2026-05-04T10:00:00Z
 current_stage: implementation
-current_role: tester
-current_pr: 6
+current_role: reviewer
+current_pr: 7
 retry_count: 0
 state: in-progress
 uat_notion_url: https://app.notion.com/p/3535213213e781a5b7edfaf7bb1a5fac
@@ -45,13 +45,14 @@ uat_backlog_id: 35352132-13e7-8189-96f4-df6d7c163335
 
 ## next_action_prompt
 
-ブランチ: `feature/wakaba`
+ブランチ: `feature/wakaba-impl`
 
-あなたは Tester です。`docs/roles/tester.md` と本ファイル (state.md)、
+あなたは Reviewer です。`docs/roles/reviewer.md` と本ファイル (state.md)、
 `docs/features/wakaba/requirements.md`、`docs/features/wakaba/design.md`、
 `docs/features/wakaba/test-ut.md` を読んでください。
-IT を実施し、`docs/features/wakaba/test-it.md` を作成してください。
-完了時は state.md を更新してください。
+Implementer が作成した実装 (PR #7) をレビューし、
+approve または request changes を行ってください。
+完了時は state.md を更新し、next_action_prompt を次のロール向けに書き換えてください。
 
 ## history
 
@@ -65,3 +66,4 @@ IT を実施し、`docs/features/wakaba/test-it.md` を作成してください�
 - 2026-05-02T03:10:00Z [implementer] fix for IT failure (PR #5): auth.ts accessToken, nginx X-User-Id scope
 - 2026-05-02T04:00:00Z [implementer] fix for reviewer request changes (PR #6): DiscordDigestService.sendDigestToAllUsers, SyncService.scheduledSync, auth.ts session callback
 - 2026-05-02T05:00:00Z [reviewer] PR #6 approved, merged
+- 2026-05-04T10:00:00Z [implementer] fix for IT failure (PR #7): AppBeans.kt UUID TypeHandler, tsconfig.json @/auth path alias
